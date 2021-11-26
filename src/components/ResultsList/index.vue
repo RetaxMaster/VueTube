@@ -2,7 +2,7 @@
     
     <div class="results-container">
         
-        <Result v-for="result in videoResults" :key="result.id.videoId" :result="result" />
+        <Result v-for="result in videoResults" :key="result.id.videoId" :result="result" @update:video="setNewVideo" />
 
     </div>
 
@@ -12,6 +12,7 @@
 
 import Result from "./Result";
 import { mapState } from 'vuex'
+import store from '@/store'
 
 export default {
 
@@ -27,6 +28,13 @@ export default {
         ...mapState('youtube', ["videoResults"])
 
     },
+
+    methods: {
+        setNewVideo(videoInfo) {
+            // Al llamar a la mutation, debemos especificar a cuál módulo pertenece.
+            store.commit("youtube/SET_CURRENT_VIDEO", videoInfo)
+        }
+    }
 
 }
 

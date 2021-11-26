@@ -11,7 +11,7 @@
 
   <div class="input-search">
     <div class="custom-input">
-      <input type="text" placeholder="Busca un video" @keypress="searchInYouTube">
+      <input type="text" placeholder="Busca un video" @keyup="searchInYouTube">
       <div class="input-line"></div>
     </div>
   </div>
@@ -54,19 +54,23 @@ export default {
 
     searchInYouTube(e) {
 
-      const query = e.target.value + e.key;
-
       // El debounce me ayuda a no mandar multiples request cada que se presiona una tecla.
       if (!this.debounce) {
 
         this.debounce = true;
 
-        store.dispatch("youtube/searchVideo", {
-          query
-        });
-
         // Reseteamos el debounce
-        setTimeout(() => this.debounce = false, 500)
+        setTimeout(() => {
+
+          const query = e.target.value
+
+          store.dispatch("youtube/searchVideo", {
+            query
+          });
+
+          this.debounce = false
+          
+        }, 500)
 
       }
       

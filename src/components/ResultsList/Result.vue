@@ -1,6 +1,6 @@
 <template>
     
-    <div class="result">
+    <div class="result" @click="setNewVideo">
 
         <div class="image-container">
             <img :src="result.snippet.thumbnails.high.url" :alt="result.snippet.title">
@@ -21,9 +21,24 @@ export default {
     name: "Result",
 
     props: {
-        result: Object
-    }
 
+        result: {
+            type: Object,
+            required: true
+        }
+
+    },
+
+    methods: {
+
+        setNewVideo() {
+            this.$emit("update:video", {
+                url: `https://www.youtube.com/embed/${this.result.id.videoId}`,
+                title: this.result.snippet.title
+            });
+        }
+
+    }
 }
 </script>
 

@@ -2,11 +2,7 @@
     
     <div class="results-container">
         
-        <Result />
-        <Result />
-        <Result />
-        <Result />
-        <Result />
+        <Result v-for="result in videoResults" :key="result.id.videoId" :result="result" />
 
     </div>
 
@@ -15,6 +11,7 @@
 <script>
 
 import Result from "./Result";
+import { mapState } from 'vuex'
 
 export default {
 
@@ -22,7 +19,14 @@ export default {
 
     components: {
         Result
-    }
+    },
+
+    computed: {
+
+        // Uso: mapState(moduleName, { state })
+        ...mapState('youtube', ["videoResults"])
+
+    },
 
 }
 

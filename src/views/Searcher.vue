@@ -2,8 +2,8 @@
   
 <main>
 
-  <iframe width="560" height="315"  src="https://www.youtube.com/embed/2DQFFLHNrKo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  <h1>Título del video</h1>
+  <iframe width="560" height="315" :src="currentVideo.url" :title="currentVideo.title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <h1>{{ currentVideo.title }}</h1>
 
 </main>
 
@@ -11,7 +11,7 @@
 
   <div class="input-search">
     <div class="custom-input">
-      <input type="text" placeholder="Busca un video">
+      <input type="text" placeholder="Busca un video" @keypress="searchInYouTube">
       <div class="input-line"></div>
     </div>
   </div>
@@ -25,13 +25,53 @@
 <script>
 
 import ResultsList from "@/components/ResultsList"
+import { mapState } from 'vuex'
+import store from '@/store'
 
 export default {
 
   name: 'Searcher',
 
+
+  data() {
+    return {
+      debounce: false
+    }
+  },
+
   components: {
     ResultsList
+  },
+
+  computed: {
+
+    // Uso: mapState(moduleName, { state })
+    ...mapState('youtube', ["currentVideo"])
+
+  },
+
+  methods: {
+
+    searchInYouTube(e) {
+
+      const query = e.target.value + e.key;
+
+      // El debounce me ayuda a no mandar multiples request cada que se presiona una tecla.
+      if (!this.debounce) {
+
+        this.debounce = true;
+
+        store.dispatch("youtube/searchVideo", {
+          query
+        });
+
+        // Reseteamos el debounce
+        setTimeout(() => this.debounce = false, 500)
+
+      }
+      
+    }
+
   }
 
 }
@@ -74,6 +114,7 @@ main {
   outline: none;
   border-bottom: 2px solid #ccc;
   background: none;
+  color: #fff;
 }
 
 .input-search .custom-input .input-line {

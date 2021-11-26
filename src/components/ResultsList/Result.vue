@@ -3,12 +3,12 @@
     <div class="result">
 
         <div class="image-container">
-            <img src="https://i.ytimg.com/vi/2DQFFLHNrKo/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCnN5b9wcbthWLYMcUsl8JB-RK9uA" alt="Título del video">
+            <img :src="result.snippet.thumbnails.high.url" :alt="result.snippet.title">
         </div>
 
         <div class="video-info">
-            <h2>Título del video</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem excepturi ipsam unde, distinctio, impedit culpa deserunt esse rerum repudiandae voluptatem magni laudantium amet. Non natus a excepturi aspernatur impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem excepturi ipsam unde, distinctio, impedit culpa deserunt esse rerum repudiandae voluptatem magni laudantium amet. Non natus a excepturi aspernatur impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem excepturi ipsam unde, distinctio, impedit culpa deserunt esse rerum repudiandae voluptatem magni laudantium amet. Non natus a excepturi aspernatur impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem excepturi ipsam unde, distinctio, impedit culpa deserunt esse rerum repudiandae voluptatem magni laudantium amet. Non natus a excepturi aspernatur impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem excepturi ipsam unde, distinctio, impedit culpa deserunt esse rerum repudiandae voluptatem magni laudantium amet. Non natus a excepturi aspernatur impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem excepturi ipsam unde, distinctio, impedit culpa deserunt esse rerum repudiandae voluptatem magni laudantium amet. Non natus a excepturi aspernatur impedit?</p>
+            <h2>{{ result.snippet.title }}</h2>
+            <p>{{ result.snippet.description }}</p>
         </div>
 
     </div>
@@ -20,7 +20,9 @@ export default {
     
     name: "Result",
 
-
+    props: {
+        result: Object
+    }
 
 }
 </script>

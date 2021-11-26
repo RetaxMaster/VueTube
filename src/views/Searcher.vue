@@ -1,11 +1,6 @@
 <template>
   
-<main>
-
-  <iframe width="560" height="315" :src="currentVideo.url" :title="currentVideo.title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  <h1>{{ currentVideo.title }}</h1>
-
-</main>
+<YTVideo :video="currentVideo" />
 
 <section>
 
@@ -24,7 +19,7 @@
 
 <script>
 
-import ResultsList from "@/components/ResultsList"
+import { defineAsyncComponent } from 'vue'
 import { mapState } from 'vuex'
 import store from '@/store'
 
@@ -40,7 +35,8 @@ export default {
   },
 
   components: {
-    ResultsList
+    ResultsList: defineAsyncComponent( () => import(/*webpackChunkName: "ResultsList" */ '@/components/ResultsList') ),
+    YTVideo: defineAsyncComponent( () => import(/*webpackChunkName: "YouTubeVideo" */ '@/components/YTVideo') ),
   },
 
   computed: {

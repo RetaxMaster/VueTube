@@ -30,12 +30,12 @@ export default {
 <style scoped>
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #202020;
-    padding: 10px 20px;
-    color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #202020;
+  padding: 10px 20px;
+  color: #fff;
 }
 
 </style>

@@ -11,7 +11,7 @@
 
   <div class="input-search">
     <div class="custom-input">
-      <input type="text" placeholder="Busca un video" @keyup="searchInYouTube">
+      <input v-focus type="text" placeholder="Busca un video" @keyup="searchInYouTube">
       <div class="input-line"></div>
     </div>
   </div>
